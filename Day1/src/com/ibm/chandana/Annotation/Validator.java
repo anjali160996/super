@@ -42,4 +42,13 @@ public class Validator {
 		}
 		return fields;
 	}
+
+	public static List<String> validateRegistration(UserRegistration reg) {
+		ValidationRule<String> blank = ValidationRule.notBlank();
+		ValidationRule<String> minlength = ValidationRule.minLength(2);
+		ValidationRule<String> matches = ValidationRule.matches(".+@.+\\..+");
+		ValidationRule<String> nameRule =blank.and(matches);
+		return null;
+
+	}
 }
