@@ -47,8 +47,17 @@ public class Validator {
 		ValidationRule<String> blank = ValidationRule.notBlank();
 		ValidationRule<String> minlength = ValidationRule.minLength(2);
 		ValidationRule<String> matches = ValidationRule.matches(".+@.+\\..+");
-		ValidationRule<String> nameRule =blank.and(matches);
-		return null;
+		ValidationRule<String> nameRule =blank.and(minlength);
+		ValidationRule<String> emailRule =blank.and(matches);
+		 List<String> errors = new ArrayList<>();
+		 if (reg.getName() != null && !nameRule.test(reg.getName())) {
+	            errors.add("name: " + nameRule.messages(reg.getName()));
+	        }
+		 if (reg.getEmail() != null && !emailRule.test(reg.getEmail())) {
+	            errors.add("email: " + emailRule.messages(reg.getEmail()));
+	        }
+		return errors ;
+		
 
 	}
 }
